@@ -1,4 +1,4 @@
-ci: covers phpunit cs stan phpunit-system
+ci: covers phpunit phpunit-system cs npm-ci validate-app-config stan
 
 test: covers phpunit
 
@@ -20,4 +20,13 @@ cs:
 stan:
 	docker-compose run --rm --no-deps app php -d memory_limit=-1 vendor/bin/phpstan analyse --level=1 --no-progress cli/ contexts/ src/ tests/
 
-.PHONY: setup ci test covers phpunit phpunit-system cs stan
+validate-app-config:
+	docker-compose run --rm --no-deps app ./console validate-config app/config/config.dist.json app/config/config.test.json
+
+phpmd:
+	docker-compose run --rm --no-deps app ./vendor/bin/phpmd src/ text phpmd.xml
+
+npm-ci:
+	docker run -it -v $(shell pwd):/code -w /code digitallyseamless/nodejs-bower-grunt npm run ci
+
+.PHONY: setup ci test covers phpunit phpunit-system cs stan validate-app-config phpmd npm-ci
