@@ -26,7 +26,10 @@ validate-app-config:
 phpmd:
 	docker-compose run --rm --no-deps app ./vendor/bin/phpmd src/ text phpmd.xml
 
-npm-ci:
-	docker run -it -v $(shell pwd):/code -w /code digitallyseamless/nodejs-bower-grunt npm run ci
+npm-install:
+	docker run -it --rm -v $(shell pwd):/data digitallyseamless/nodejs-bower-grunt npm install
 
-.PHONY: setup ci test covers phpunit phpunit-system cs stan validate-app-config phpmd npm-ci
+npm-ci:
+	docker run -it --rm --user $(id -u):$(id -g) -v $(shell pwd):/data digitallyseamless/nodejs-bower-grunt npm run ci
+
+.PHONY: setup ci test covers phpunit phpunit-system cs stan validate-app-config phpmd npm-install npm-ci
