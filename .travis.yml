@@ -19,6 +19,7 @@ matrix:
 #  - env: DB=sqlite; TYPE=coverage
 
 before_install:
+  - docker build -t wmde/fundraising-frontend-x64 build/x64
   - docker build -t wmde/fundraising-frontend-phpstan build/phpstan
 
 install:
@@ -34,6 +35,7 @@ before_script:
 script:
   - composer ci
   - travis_retry vendor/bin/phpunit tests/System/
+  - docker run -v $PWD:/app -w /app --rm wmde/fundraising-frontend-x64 vendor/bin/phpunit
   - composer install --no-dev -q
   - docker run -v $PWD:/app --rm wmde/fundraising-frontend-phpstan analyse -c phpstan.neon --level 1 --no-progress cli/ contexts/ src/
 
