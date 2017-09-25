@@ -64,7 +64,7 @@ class AddCommentRouteTest extends WebRouteTestCase {
 	private function getNewlyStoredDonation( FunFunFactory $factory ): Donation {
 		$factory->setTokenGenerator( new FixedTokenGenerator(
 			self::CORRECT_UPDATE_TOKEN,
-			new \DateTime( '9001-01-01' )
+			new \DateTime( '2034-01-01' )
 		) );
 
 		$donation = ValidDonation::newDirectDebitDonation();
