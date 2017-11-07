@@ -1,9 +1,9 @@
 .idea
 node_modules
-dist
+#dist
 .sass-cache
 package-lock.json
-src/build/*
+#src/build/*
 src/css/main.css
 src/css/main.css.map
 src/index.html
