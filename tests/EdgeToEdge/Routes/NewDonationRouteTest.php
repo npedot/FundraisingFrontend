@@ -58,6 +58,17 @@ class NewDonationRouteTest extends WebRouteTestCase {
 			],
 			[
 				[
+					'amountGiven' => '8.70',
+					'zahlweise' => 'BEZ',
+					'periode' => '0'
+				],
+				[
+					'validity' => 'valid',
+					'formattedAmount' => '8,70'
+				]
+			],
+			[
+				[
 					'betrag_auswahl' => '0',
 					'zahlweise' => 'PPL',
 					'periode' => 6
